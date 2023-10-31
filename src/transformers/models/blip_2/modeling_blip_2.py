@@ -1208,9 +1208,7 @@ class Blip2Model(Blip2PreTrainedModel):
 
         self.vision_model = Blip2VisionModel(config.vision_config)
 
-        self.query_tokens = nn.Parameter(torch.zeros(1, config.num_query_tokens, config.qformer_config.hidden_size))
-        self.qformer = Blip2QFormerModel(config.qformer_config)
-
+       
         self.language_projection = nn.Linear(config.qformer_config.hidden_size, config.text_config.hidden_size)
         if config.use_decoder_only_language_model:
             language_model = AutoModelForCausalLM.from_config(config.text_config)
